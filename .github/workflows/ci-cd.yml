@@ -12,8 +12,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout code with LFS
         uses: actions/checkout@v3
+        with:
+          lfs: true  # This ensures LFS files are downloaded.
+
+      - name: Install Git LFS
+        run: git lfs install
+
+      - name: Verify LFS Files
+        run: git lfs pull  # Make sure LFS files (like .joblib) are downloaded.
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -27,6 +35,7 @@ jobs:
 
       - name: Run tests
         run: pytest tests/
+
 
   build-and-push:
     needs: test
