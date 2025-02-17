@@ -21,15 +21,18 @@ def read_root():
 
 @app.post("/predict")
 def read_root(input: TextInput):
-    cl_text = clean_text(input.text)
-    features = vectorizer.transform([cl_text])
+    try: 
+        cl_text = clean_text(input.text)
+        features = vectorizer.transform([cl_text])
 
-    probabilities = model.predict_proba(features)[0]
-    prediction = model.predict(features)[0]
+        probabilities = model.predict_proba(features)[0]
+        prediction = model.predict(features)[0]
 
-    mbti_type = label_encoder.inverse_transform([prediction])[0]
-    confidence = max(probabilities)
-    return {"mbti_type": mbti_type, "confidence": int(round(confidence, 2))}
+        mbti_type = label_encoder.inverse_transform([prediction])[0]
+        confidence = max(probabilities)
+        return {"mbti_type": mbti_type, "confidence": round(confidence, 2)}
+    except Exception as e:
+            return {"error": str(e)}
 
 
 def clean_text(text):
