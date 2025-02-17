@@ -42,18 +42,18 @@ This API predicts a user's MBTI personality type based on text input. The soluti
 
 ### 1️⃣ **Clone the Repository**
 ```bash
-git clone <repository_url>
-cd personality-type-predictor
+git clone https://github.com/SananSuleymanov/mbti.git
+cd mbti
 ```
 
 ### 2️⃣ **Build the Docker Image**
 ```bash
-docker build -t personality-predictor .
+docker build -t mbti-fastapi-app .
 ```
 
 ### 3️⃣ **Run the Docker Container**
 ```bash
-docker run -d -p 8000:8000 personality-predictor
+docker run -d -p 8000:8000 mbti-fastapi-app
 ```
 
 ### 4️⃣ **Access the API**
@@ -64,20 +64,15 @@ docker run -d -p 8000:8000 personality-predictor
 
 ## 🧠 **Model Training**
 The model was trained using a **RandomForestClassifier** on the **MBTI dataset**.
-- **Training Script:** `model-training.py`
+- **Training Notebook:** `model-training.ipynb`
 - **Model Accuracy:** `0.68`
-
-### **Run Model Training**
-```bash
-python model-training.py
-```
 
 ---
 
 ## 📦 **Project Structure**
 ```
 .
-├── model-training.py        # Script for training the model
+├── model-training.ipynb        # notebook for training the model
 ├── main.py                  # FastAPI application code
 ├── Dockerfile               # Docker configuration file
 ├── requirements.txt         # Python dependencies
