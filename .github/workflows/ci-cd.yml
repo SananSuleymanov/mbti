@@ -1,4 +1,4 @@
-name: FastAPI CI/CD
+name: FastAPI MBTI CI/CD
 
 on:
   push:
@@ -15,13 +15,13 @@ jobs:
       - name: Checkout code with LFS
         uses: actions/checkout@v3
         with:
-          lfs: true  # This ensures LFS files are downloaded.
+          lfs: true 
 
       - name: Install Git LFS
         run: git lfs install
 
       - name: Verify LFS Files
-        run: git lfs pull  # Make sure LFS files (like .joblib) are downloaded.
+        run: git lfs pull  
 
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -48,10 +48,10 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t my-fastapi-app .
+        run: docker build -t mbti-fastapi-app .
 
       - name: Tag Docker image
-        run: docker tag my-fastapi-app ${{ secrets.DOCKER_USERNAME }}/my-fastapi-app:latest
+        run: docker tag mbti-fastapi-app ${{ secrets.DOCKER_USERNAME }}/mbti-fastapi-app:latest
 
-      - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/my-fastapi-app:latest
+      - name: Push Docker image to DockerHub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/mbti-fastapi-app:latest
