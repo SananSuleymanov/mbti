@@ -42,18 +42,18 @@ This API predicts a user's MBTI personality type based on text input. The soluti
 
 ### 1️⃣ **Clone the Repository**
 ```bash
-git clone https://github.com/SananSuleymanov/mbti.git
-cd mbti
+git clone <repository_url>
+cd personality-type-predictor
 ```
 
 ### 2️⃣ **Build the Docker Image**
 ```bash
-docker build -t mbti-fastapi-app .
+docker build -t personality-predictor .
 ```
 
 ### 3️⃣ **Run the Docker Container**
 ```bash
-docker run -d -p 8000:8000 mbti-fastapi-app
+docker run -d -p 8000:8000 personality-predictor
 ```
 
 ### 4️⃣ **Access the API**
@@ -64,21 +64,30 @@ docker run -d -p 8000:8000 mbti-fastapi-app
 
 ## 🧠 **Model Training**
 The model was trained using a **RandomForestClassifier** on the **MBTI dataset**.
-- **Training Notebook:** `model-training.ipynb`
+- **Training Script:** `model-training.py`
 - **Model Accuracy:** `0.68`
+
+### **Run Model Training**
+```bash
+python model-training.py
+```
 
 ---
 
 ## 📦 **Project Structure**
 ```
 .
-├── model-training.ipynb        # notebook for training the model
+├── model-training.py        # Script for training the model
 ├── main.py                  # FastAPI application code
 ├── Dockerfile               # Docker configuration file
 ├── requirements.txt         # Python dependencies
 ├── mbti_classifier.joblib   # Trained RandomForest model
-├── tfidf_vectorizer.joblib  # TF-IDF vectorizer
+├── tfidf_vectorizer.joblib   # TF-IDF vectorizer
 ├── label_encoder.joblib     # Label encoder for personality types
+├── .github
+│   └── workflows
+│       └── ci-cd.yml        # CI/CD pipeline configuration
+├── tests                    # Folder containing test scripts
 └── README.md                # Project documentation
 ```
 
@@ -118,12 +127,5 @@ Expected Output:
 The interactive API documentation is available via:
 - **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
 - **ReDoc:** [http://localhost:8000/redoc](http://localhost:8000/redoc)
-
----
-
-## 🛠️ **CI/CD Integration**
-The project uses **GitHub Actions** for CI/CD:
-- **Run tests** to validate API functionality.
-- **Build Docker image** automatically upon successful test runs.
 
 ---
